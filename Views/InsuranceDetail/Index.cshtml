@@ -1,0 +1,129 @@
+﻿@model TrainingApplication.ViewModel.InsuranceDetailVM
+
+@using (Html.BeginForm("PostData", "InsuranceDetail", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>
+                @Html.Label("Insurnace Type")
+            </td>
+            <td>
+                :
+            </td>
+            <td>
+                @Html.DropDownListFor(m => m.InsurnaceType,Model.InsuranceTypeList,"Select Type")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.Label("InsuranceId")
+            </td>
+            <td>
+                :
+            </td>
+            <td>
+                @Html.TextBoxFor(x=>x.InsuranceId)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <input type="submit" value="Fetch Detail" />
+            </td>
+        </tr>
+    </table>
+
+    @if (Model.InsurnaceType?.ToLower() == "auto")
+    {
+        <table>
+            <tr>
+                <td colspan="3">
+                    Insurnace Detail:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("VinNo")
+                </td>
+                <td>
+                    :
+                </td>
+                <td>
+                    @Html.DisplayFor(x=>x.AutoInsurnaceDtl.VinNo)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("DriverName")
+                </td>
+                <td>
+                    :
+                </td>
+                <td>
+                    @Html.DisplayFor(x=>x.AutoInsurnaceDtl.DriveName)
+                </td>
+            </tr>
+        </table>
+    }
+    else if (Model.InsurnaceType?.ToLower() == "house")
+    {
+        <table>
+            <tr>
+                <td colspan="3">
+                    Insurnace Detail:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("HomeType")
+                </td>
+                <td>
+                    :
+                </td>
+                <td>
+                    @Html.DisplayFor(x=>x.HomeInsuranceDtl.HomeType)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("NumberOfStories")
+                </td>
+                <td>
+                    :
+                </td>
+                <td>
+                    @Html.DisplayFor(x=>x.HomeInsuranceDtl.NumberOfStories)
+                </td>
+            </tr>
+        </table>
+    }
+}
+
+@*<html>
+<head>
+    <meta name="viewport" content="width = device-width" />
+    <title>Insurance Detail</title>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>
+                @Html.Label("Insurnace Type")
+            </td>
+            <td>
+                :
+            </td>
+            <td>
+                @Html.DropDownList("InsurnaceType", new List<SelectListItem>(){
+                                        new SelectListItem(){ Text="Auto",Value="Auto" },
+                new SelectListItem(){ Text="House",Value="House" }})
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>*@
