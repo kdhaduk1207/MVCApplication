@@ -5,19 +5,21 @@ using TrainingApplication.Entities;
 
 namespace TrainingApplication.Data.Repository
 {
-    // Not in used
-    public class HouseInsuranceRepo : IHomeInsurnace
+    public class GenericRepository<T> : IGenericRepo<T> where T : BaseEntity
     {
+
         private readonly DataContext dataContext;
 
-        public HouseInsuranceRepo(DataContext dataContext)
+        public GenericRepository(DataContext dataContext)
         {
             this.dataContext = dataContext;
         }
 
-        public async Task<HomeInsurance> GetInsurnaceDetail(int id)
+        public async Task<T> GetInsurnaceDetail(int id)
         {
-            return await dataContext.HomeInsurances.SingleOrDefaultAsync(x => x.Id == id);
+            return await dataContext.Set<T>().SingleOrDefaultAsync(x => x.Id == id);
         }
     }
+
 }
+

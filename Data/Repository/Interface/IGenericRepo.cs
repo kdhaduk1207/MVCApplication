@@ -3,9 +3,8 @@ using TrainingApplication.Entities;
 
 namespace TrainingApplication.Data.Repository.Interface
 {
-    // Not in used
-    public interface IHomeInsurnace
+    public interface IGenericRepo<T> where T : BaseEntity
     {
-        public Task<HomeInsurance> GetInsurnaceDetail(int id);
+        public Task<T> GetInsurnaceDetail(int id);
     }
 }

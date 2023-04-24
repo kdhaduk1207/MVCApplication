@@ -32,8 +32,11 @@ namespace TrainingApplication
                 databaseoption.UseSqlServer(Configuration["ConnectionStrings:Insurance"]);
             });
 
-            services.AddScoped<IAutoInsurnace,AutoInsuranceRepo>();
-            services.AddScoped<IHomeInsurnace, HouseInsuranceRepo>();
+            //services.AddScoped<IAutoInsurnace,AutoInsuranceRepo>();
+            //services.AddScoped<IHomeInsurnace, HouseInsuranceRepo>();
+
+            services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepository<>));
+
             services.AddControllersWithViews();
         }
 

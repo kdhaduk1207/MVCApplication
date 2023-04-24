@@ -3,16 +3,30 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TrainingApplication.Data.Repository.Interface;
+using TrainingApplication.Entities;
 using TrainingApplication.ViewModel;
 
 namespace TrainingApplication.Controllers
 {
     public class InsuranceDetail : Controller
     {
+       /* NOT IN USED CODE
+        
         private readonly IHomeInsurnace homeInsurnace;
         private readonly IAutoInsurnace autoInsurnace;
 
         public InsuranceDetail(IHomeInsurnace homeInsurnace, IAutoInsurnace autoInsurnace)
+        {
+            this.homeInsurnace = homeInsurnace;
+            this.autoInsurnace = autoInsurnace;
+        }
+
+       */
+
+        private readonly IGenericRepo<HomeInsurance> homeInsurnace;
+        private readonly IGenericRepo<AutoInsurance> autoInsurnace;
+
+        public InsuranceDetail(IGenericRepo<HomeInsurance> homeInsurnace, IGenericRepo<AutoInsurance> autoInsurnace)
         {
             this.homeInsurnace = homeInsurnace;
             this.autoInsurnace = autoInsurnace;

@@ -6,6 +6,8 @@ using TrainingApplication.Entities;
 
 namespace TrainingApplication.Data.Repository
 {
+
+    // Not in used
     public class AutoInsuranceRepo : IAutoInsurnace
     {
         private readonly DataContext dataContext;

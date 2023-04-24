@@ -6,9 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TrainingApplication.Entities
 {
-    public class AutoInsurance
+    public class AutoInsurance : BaseEntity
     {
-        public int Id { get; set; }
+       
         
         [Required]
         [MaxLength(20)]

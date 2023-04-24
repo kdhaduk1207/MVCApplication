@@ -3,11 +3,8 @@ using System.Runtime.InteropServices;
 
 namespace TrainingApplication.Entities
 {
-    public class HomeInsurance
+    public class HomeInsurance : BaseEntity
     {
-        
-        public int Id { get; set; }
-
         [MaxLength(50)]
         public string HomeType { get; set; }
 
