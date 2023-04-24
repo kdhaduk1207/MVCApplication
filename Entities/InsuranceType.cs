@@ -1,7 +1,7 @@
 ﻿namespace TrainingApplication.Entities
 {
-    public class InsuranceType
+    public class InsuranceType : BaseEntity
     {
-
+        public string Name { get; set; }
     }
 }

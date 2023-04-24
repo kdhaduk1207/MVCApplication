@@ -13,5 +13,7 @@ namespace TrainingApplication.Data
         public DbSet<AutoInsurance> AutoInsurances { get; set; }
 
         public DbSet<HomeInsurance> HomeInsurances { get; set; }
+
+        public DbSet<InsuranceType> InsuranceTypes { get; set; }
     }
 }

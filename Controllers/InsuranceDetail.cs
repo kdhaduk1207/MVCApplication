@@ -10,34 +10,40 @@ namespace TrainingApplication.Controllers
 {
     public class InsuranceDetail : Controller
     {
-       /* NOT IN USED CODE
-        
-        private readonly IHomeInsurnace homeInsurnace;
-        private readonly IAutoInsurnace autoInsurnace;
+        /* NOT IN USED CODE
 
-        public InsuranceDetail(IHomeInsurnace homeInsurnace, IAutoInsurnace autoInsurnace)
-        {
-            this.homeInsurnace = homeInsurnace;
-            this.autoInsurnace = autoInsurnace;
-        }
+         private readonly IHomeInsurnace homeInsurnace;
+         private readonly IAutoInsurnace autoInsurnace;
 
-       */
+         public InsuranceDetail(IHomeInsurnace homeInsurnace, IAutoInsurnace autoInsurnace)
+         {
+             this.homeInsurnace = homeInsurnace;
+             this.autoInsurnace = autoInsurnace;
+         }
+
+        */
 
         private readonly IGenericRepo<HomeInsurance> homeInsurnace;
         private readonly IGenericRepo<AutoInsurance> autoInsurnace;
+        private readonly IGenericRepo<InsuranceType> insuranceType;
+        private static List<SelectListItem> insuranceTypeList;
 
-        public InsuranceDetail(IGenericRepo<HomeInsurance> homeInsurnace, IGenericRepo<AutoInsurance> autoInsurnace)
+        public InsuranceDetail(IGenericRepo<InsuranceType> insuranceType, IGenericRepo<HomeInsurance> homeInsurnace, IGenericRepo<AutoInsurance> autoInsurnace)
         {
             this.homeInsurnace = homeInsurnace;
             this.autoInsurnace = autoInsurnace;
+            this.insuranceType = insuranceType;
+
         }
 
-        public IActionResult Index()
+        public async Task<ActionResult> Index()
         {
+            if (insuranceTypeList == null)
+            {
+                insuranceTypeList = await FetchInsurnaceType();
+            }
             InsuranceDetailVM insuranceDetailVM = new InsuranceDetailVM();
-            insuranceDetailVM.InsuranceTypeList = new List<SelectListItem>(){
-                                        new SelectListItem(){ Text="Auto",Value="Auto" },
-                new SelectListItem(){ Text="House",Value="House" }};
+            insuranceDetailVM.InsuranceTypeList = insuranceTypeList;
 
             return View(insuranceDetailVM);
         }
@@ -47,9 +53,10 @@ namespace TrainingApplication.Controllers
         {
             //// the value is received in the controller.
             //var selectedGender = model.Gender;
-            model.InsuranceTypeList = new List<SelectListItem>(){
-                                        new SelectListItem(){ Text="Auto",Value="Auto" },
-                new SelectListItem(){ Text="House",Value="House" }};
+
+
+
+            model.InsuranceTypeList = insuranceTypeList;
 
             if (model.InsurnaceType.ToLower() == "auto")
             {
@@ -65,6 +72,24 @@ namespace TrainingApplication.Controllers
 
 
             return View("Index", model);
+        }
+
+        private async Task<List<SelectListItem>> FetchInsurnaceType()
+        {
+            var insuranceTypeList = new List<SelectListItem>();
+
+            var insurnaceTypeLst = await insuranceType.GetAll();
+
+            foreach (var item in insurnaceTypeLst)
+            {
+                insuranceTypeList.Add(new SelectListItem()
+                {
+                    Text = item.Name,
+                    Value = item.Name
+                });
+            }
+            return insuranceTypeList;
+
         }
     }
 }
